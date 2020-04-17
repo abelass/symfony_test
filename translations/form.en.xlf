@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="y9O4aZF" resname="label.telephone">
+        <source>label.telephone</source>
+        <target>Telephone:</target>
+      </trans-unit>
+      <trans-unit id="ITvNUcF" resname="label.created.at">
+        <source>label.created.at</source>
+        <target>Created at:</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

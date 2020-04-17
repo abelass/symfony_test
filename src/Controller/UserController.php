@@ -9,12 +9,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @Route("/user")
+ * @Route("{_locale}/user")
  */
 class UserController extends AbstractController
 {
+    private $_translator;
+    private $_locale;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->_translator = $translator;
+        $request = new Request();
+        $this->_locale = $request->getLocale();
+
+    }
     /**
      * @Route("/", name="user_index", methods={"GET"})
      */
@@ -64,7 +75,9 @@ class UserController extends AbstractController
     public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(UserType::class, $user);
+
         $form->handleRequest($request);
+  
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
@@ -74,7 +87,11 @@ class UserController extends AbstractController
 
         return $this->render('user/edit.html.twig', [
             'user' => $user,
+            'title' => $this->_translator->trans('title.edit.user'),
+            'button_label' => $this->_translator->trans('label.update', [], 'form'),
+            'locale' => $this->_locale,
             'form' => $form->createView(),
+
         ]);
     }
 
